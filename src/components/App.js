@@ -23,24 +23,24 @@ const App = () => {
   return (
     <div>
       <form>
-            <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
-            <input type="number" name="age" value={age} onChange={e => setAge(e.target.value)} />
-            </form>
-        <table border={1}>
-          <tbody>
-          {data.length > 0 && data.map(row => (
-            <tr key={row.id}>
-              <td>{row.name}</td>
-              <td>{row.age}</td>
-              <td><button onClick={() => removeRow(row.id)}>Remove</button></td>
-            </tr>
-          ))}
-          </tbody>
-        </table>
-        <div>
-          <button onClick={addMore} value="Add More..">Add More..</button>
-          <button onClick={handleSubmit}>Submit</button>
-        </div>
+        <input type="number" name="age" value={age} onChange={e => setAge(e.target.value)} />
+        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
+      </form>
+      <table border={1}>
+        <tbody>
+        {data.length > 0 && data.map(row => (
+          <tr key={row.id}>
+            <td>{row.name}</td>
+            <td>{row.age}</td>
+            <td><button onClick={() => removeRow(row.id)}>Remove</button></td>
+          </tr>
+        ))}
+        </tbody>
+      </table>
+      <div>
+        <button onClick={addMore} value="Add More..">Add More..</button>
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   )
 }
