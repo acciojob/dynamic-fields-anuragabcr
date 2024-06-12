@@ -51,53 +51,52 @@ import React, { useState } from 'react';
 
 function App() {
   const [fields, setFields] = useState([
-    { id: 1, name: '', age: '' },
+    { name: '', age: '' },
   ]);
 
   const handleAddField = () => {
-    const newField = { id: fields.length + 1, name: '', age: '' };
+    const newField = { name: '', age: '' };
     setFields([...fields, newField]);
   };
 
   const handleRemoveField = (id) => {
-    setFields(fields.filter((field) => field.id !== id));
+    setFields(fields.splice(id, 1));
   };
 
-  const handleChange = (id, event) => {
+  const handleChange = (index, event) => {
     const updatedFields = [...fields];
-    const index = updatedFields.findIndex((field) => field.id === id);
     updatedFields[index][event.target.name] = event.target.value;
     setFields(updatedFields);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Form data:', fields);
+    console.log(fields);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {fields.map((field) => (
-        <div key={field.id} className="field">
-          <label htmlFor={`name-${field.id}`}>Name:</label>
+      {fields.map((field, index) => (
+        <div key={index} className="field">
+          <label htmlFor={`name-${index}`}>Name:</label>
           <input
             type="text"
-            id={`name-${field.id}`}
+            id={`name-${index}`}
             name="name"
             value={field.name}
-            onChange={(e) => handleChange(field.id, e)}
+            onChange={(e) => handleChange(index, e)}
           />
 
-          <label htmlFor={`age-${field.id}`}>Age:</label>
+          <label htmlFor={`age-${index}`}>Age:</label>
           <input
             type="number"
-            id={`age-${field.id}`}
+            id={`age-${index}`}
             name="age"
-            value={field.id}
-            onChange={(e) => handleChange(field.id, e)}
+            value={field.age}
+            onChange={(e) => handleChange(index, e)}
           />
 
-          <button type="button" onClick={() => handleRemoveField(field.id)}>
+          <button type="button" onClick={() => handleRemoveField(index)}>
             Remove
           </button>
         </div>
